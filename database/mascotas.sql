@@ -11,10 +11,12 @@ CREATE TABLE pet (
 
 -- 3. Insertar datos de mascotas
 INSERT INTO pet (name, born, category, chip, adopt) VALUES
-('Boby', '2023-03-15', 'Perro', 'CHIP12345', false),
-('Miau', '2021-03-20', 'Gato', 'CHIP002', false),
-('Yuri', '2020-05-15', 'Perro', 'CHIP001', true),
-;
+('Firulais', '2023-03-15', 'Perro', 'CHIP12345', false),
+('Luna', '2021-03-20', 'Gato', 'CHIP002', false),
+('Max', '2020-05-15', 'Perro', 'CHIP001', false),
+('Mishi', '2022-07-20', 'Gato', 'CHIP54321', true),
+('Rex', '2024-01-10', 'Perro', 'CHIP99999', false),
+('Thor', '2019-11-10', 'Perro', 'CHIP003', true);
 
 -- 4. Verificar los datos insertados
 SELECT * FROM pet;

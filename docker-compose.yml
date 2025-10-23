@@ -14,9 +14,9 @@ services:
     environment:
       POSTGRES_USER: usuario_app
       POSTGRES_PASSWORD: root123
-      POSTGRES_DB: protectora
+      POSTGRES_DB: mascotas
     ports:
-      - "5433:5432"
+      - "5435:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
