@@ -19,6 +19,7 @@ services:
       - "5435:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 
   pgadmin:
     image: dpage/pgadmin4
@@ -28,6 +29,8 @@ services:
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: admin123
+    volumes:
+      - ./servers.json:/pgadmin4/servers.json  # ← CONFIGURACIÓN AUTOMÁTICA
     depends_on:
       - db
 

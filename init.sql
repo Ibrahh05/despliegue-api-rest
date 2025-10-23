@@ -1,6 +1,5 @@
-
--- 2. Crear tabla con autoincrement y orden especificado
-CREATE TABLE pet (
+-- init.sql - Versión corregida
+CREATE TABLE IF NOT EXISTS pet (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100),
     born DATE,
@@ -9,14 +8,9 @@ CREATE TABLE pet (
     adopt BOOLEAN DEFAULT false
 );
 
--- 3. Insertar datos de mascotas
 INSERT INTO pet (name, born, category, chip, adopt) VALUES
 ('Firulais', '2023-03-15', 'Perro', 'CHIP12345', false),
 ('Luna', '2021-03-20', 'Gato', 'CHIP002', false),
 ('Max', '2020-05-15', 'Perro', 'CHIP001', false),
-('Mishi', '2022-07-20', 'Gato', 'CHIP54321', true),
-('Rex', '2024-01-10', 'Perro', 'CHIP99999', false),
-('Thor', '2019-11-10', 'Perro', 'CHIP003', true);
-
--- 4. Verificar los datos insertados
-SELECT * FROM pet;
+('Mishi', '2022-07-20', 'Gato', 'CHIP54321', true)
+ON CONFLICT DO NOTHING;
