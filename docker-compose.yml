@@ -14,7 +14,7 @@ services:
     environment:
       POSTGRES_USER: usuario_app
       POSTGRES_PASSWORD: root123
-      POSTGRES_DB: mascotas
+      POSTGRES_DB: deportivos
     ports:
       - "5435:5432"
     volumes:
@@ -30,7 +30,7 @@ services:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: admin123
     volumes:
-      - ./servers.json:/pgadmin4/servers.json  # ← CONFIGURACIÓN AUTOMÁTICA
+      - ./servers.json:/pgadmin4/servers.json
     depends_on:
       - db
 

@@ -1,0 +1,71 @@
+# docker-compose.production.yml - ARCHIVO NUEVO
+version: '3.8'
+
+services:
+  # BACKEND Spring Boot (NUEVO en producción)
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/deportivos
+      - SPRING_DATASOURCE_USERNAME=usuario_app
+      - SPRING_DATASOURCE_PASSWORD=root123
+      - SPRING_PROFILES_ACTIVE=prod
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+  # FRONTEND PHP (modificado para producción)
+  web:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8084:80"
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+  # BASE DE DATOS (igual que antes)
+  db: 
+    image: postgres:16
+    restart: always
+    environment:
+      POSTGRES_USER: usuario_app
+      POSTGRES_PASSWORD: root123
+      POSTGRES_DB: deportivos
+    ports:
+      - "5435:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - app-network
+
+  # PGADMIN (igual que antes)
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    ports:
+      - "8086:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+    volumes:
+      - ./servers.json:/pgadmin4/servers.json
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+volumes:
+  postgres_data:
+
+networks:
+  app-network:
+    driver: bridge

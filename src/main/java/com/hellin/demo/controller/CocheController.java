@@ -9,47 +9,45 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import com.hellin.demo.entity.Pet;
-import com.hellin.demo.repository.PetRepository;
+import com.hellin.demo.entity.Coche;
+import com.hellin.demo.repository.CocheRepository;
 import org.springframework.web.bind.annotation.PostMapping;
 
 
-
-
 @RestController
-@RequestMapping("/pet")
+@RequestMapping("/coche")
 /**
  * En este controlador se espone los enpoint referentes a Pets 
  * @version 1.0
  * @author Brahim Hanaoui Karbab
  */
-public class PetController {
+public class CocheController{
 
 
-    private PetRepository petRepository;
+    private CocheRepository CocheRepository;
 
-    public PetController(PetRepository petRepository) {
-        this.petRepository = petRepository;
+    public CocheController(CocheRepository CocheRepository) {
+        this.CocheRepository = CocheRepository;
     }  
 
     /**
      * Este method devuelve el listado de mascotas
-     * @return List<Pet> informacion de cada mascota
+     * @return List<Coche> informacion de cada mascota
      */
 
     @GetMapping ("/list")
-    public List<Pet> hello() {
-        return petRepository.findAll();
+    public List<Coche> hello() {
+        return CocheRepository.findAll();
         
     }
 
-    @PostMapping("/adopt/{id}")
+    @PostMapping("/comprar/{id}")
     // RedirectView --> redirigir al navegador a otra URL desde un controlador.
-    public Pet adopt(@PathVariable long id) {
-        Pet pet = petRepository.findById(id).get();
+    public Coche comprar(@PathVariable long id) {
+        Coche coche = CocheRepository.findById(id).get();
 
-        pet.setAdopt(true);
-        return petRepository.save(pet);
+         coche.setcomprado(true);
+        return CocheRepository.save(coche);
         
         
     }
